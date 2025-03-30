@@ -15,7 +15,7 @@ Keep this guide open on a separate screen so you can refer to it throughout the 
 - https://github.com/confluentinc/demo-siem-optimization/instructions/00-executive-demo.md
 
 1. In a screen you are displaying to your audience, launch the Gitpod workspace by clicking the link:
-   - https://gitpod.io/#https://github.com/confluentinc/demo-siem-optimization
+   - https://gitpod.io/#https://github.com/etz69/demo-siem-optimization
 
 > Here I'm starting a containerized lab environment that will automatically do a lot on launch.
 
