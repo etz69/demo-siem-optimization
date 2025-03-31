@@ -1,5 +1,6 @@
 FROM zeek/zeek:6.1.0
 
+# Install dependencies
 RUN apt-get update && \
     apt-get install -y \
       bison \
@@ -15,14 +16,19 @@ RUN apt-get update && \
       libpcap-dev \
       make \
       net-tools \
-      python3 \
       softflowd \
       swig \
       tcpreplay \
       zlib1g-dev \
-      && \
+      python3 \
+      python3-pip \
+      python3-venv && \
     rm -rf /var/lib/apt/lists/*
 
-RUN zkg install --force seisollc/zeek-kafka --version v1.2.0 --user-var librdkafka_root=/usr && \
-    rm -rf /usr/local/zeek/var/lib/zkg/scratch /usr/local/zeek/var/lib/zkg/testing && \
-    zeek -N Seiso::Kafka
+# Build and install Kafka plugin from SeisoLLC repo
+RUN git clone --depth 1 https://github.com/SeisoLLC/zeek-kafka.git /tmp/zeek-kafka && \
+    cd /tmp/zeek-kafka && \
+    ./configure && \
+    make && \
+    make install && \
+    rm -rf /tmp/zeek-kafka
