@@ -36,6 +36,11 @@ ports:
   - port: 9021
     onOpen: notify
     visibility: public
+    
+  # Broker Control Center
+  - port: 29092
+    onOpen: notify
+    visibility: public    
 
   # Confluent Sigma UI
   - port: 8080
