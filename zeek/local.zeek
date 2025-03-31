@@ -10,7 +10,7 @@ redef digest_salt = "Please change this value.";
 @load misc/loaded-scripts
 
 # Apply the default tuning scripts for common tuning settings.
-@load tuning/defaults
+#@load tuning/defaults
 
 # Estimate and log capture loss.
 @load misc/capture-loss
