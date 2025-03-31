@@ -25,6 +25,7 @@ services:
     ports:
       - "9092:9092"
       - "9101:9101"
+      - "29092:29092"
     healthcheck:
       test: [ "CMD-SHELL", "kafka-topics --list --bootstrap-server localhost:9092" ]
       interval: 30s
