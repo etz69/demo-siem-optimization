@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # This script uses tcpreplay to replay packet capture (PCAP) files.
-# /pcaps/syslog.pcap must exist.
 
 echo "Create dummy network"
 ip link add dummy0 type dummy
 ifconfig dummy0 mtu 3000
 ifconfig dummy0 up
+
 
 echo "Listen on dummy network with zeek packet sniffer"
 /usr/local/zeek/bin/zeek -i dummy0 local "Site::local_nets += {192.168.1.0/24 }" &
@@ -14,7 +14,7 @@ echo "Listen on dummy network with zeek packet sniffer"
 echo "Edit input syslog PCAP to simulate ssh attacks happening now"
 myether=$(ifconfig eth0 | grep ether | awk {'print $2'})
 mysubnet=$(ifconfig eth0 | grep 'inet ' | awk {'print $2'} | awk -F. {'print $1"."$2".0.0"'})
-connectip=$(/usr/bin/python -c "import socket;addr1 = socket.gethostbyname('connect');s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect((addr1,8083));print(addr1)")
+connectip=$(python3 -c "import socket;addr1 = socket.gethostbyname('connect');s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect((addr1,8083));print(addr1)")
 connectmac=$(arp -a | grep connect | awk {'print $4'})
 input="/pcaps/syslog.pcap"
 output="/pcaps/edited_syslog.pcap"
@@ -41,3 +41,4 @@ tail -f /dev/null
 
 # Get proper sigterm signal handling in Docker
 exec "$@"
+
