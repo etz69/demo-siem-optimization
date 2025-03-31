@@ -189,7 +189,7 @@ services:
 
   # See https://github.com/berthayes/zeek-tcpreplay-kafka
   zeek-streamer:
-    image: bertisondocker/zeek-tcpreplay-kafka
+    image: zeek/zeek
     build:
       context: images/zeek-tcpreplay-kafka
     platform: linux/amd64
