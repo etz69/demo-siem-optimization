@@ -38,9 +38,10 @@ ports:
     visibility: public
     
   # Broker Control Center
-  - port: 29092
+  # Confluent Server (Kafka broker)
+  - port: 9092
     onOpen: notify
-    visibility: public    
+    visibility: public
 
   # Confluent Sigma UI
   - port: 8080
@@ -64,8 +65,8 @@ ports:
     onOpen: ignore
     
   # Confluent Server (Kafka broker)
-  - port: 9092
-    onOpen: ignore
+  #- port: 9092
+  #  onOpen: ignore
     
   # Confluent Schema Registry
   - port: 8081
